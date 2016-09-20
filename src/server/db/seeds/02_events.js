@@ -9,16 +9,16 @@ exports.seed = function(knex, Promise) {
           description: 'A rousing demonstration of feline de-skinning',
           over_21: true,
           venue_id: 5,
-          start_datetime: faker.date.recent(),
-          end_datetime: faker.date.recent()
+          start_datetime: faker.date.between(faker.date.recent(), '2016-12-31'),
+          end_datetime: faker.date.future()
         }),
         knex('events').insert({
           title: faker.lorem.words(4),
           description: faker.lorem.sentence(),
           over_21: false,
           venue_id: 1,
-          start_datetime: faker.date.recent(),
-          end_datetime: faker.date.recent()
+          start_datetime: faker.date.future(),
+          end_datetime: faker.date.future()
         }),
         knex('events').insert({
           title: faker.lorem.words(4),

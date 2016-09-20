@@ -1,0 +1,60 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="col-md-12">
+      <h1>{{event.title}}</h1>
+      <hr>
+      <h4>{{event.description}}</h4>
+      <hr>
+    </div>
+    {% if event.over_21 %}
+    <br>
+    <div class="col-md-12 alert alert-warning">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <p class="text-center"><strong>Heads up!</strong> You must be 21 or older to attend this event.</p>
+    </div>
+    <br>
+    {% endif %}
+    <form class="form" method="post">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="preferred_name">Preferred Name</label>
+          <input type="text" name="preferred_name" class="form-control" placeholder="Preferred Name" id="preferred_name">
+        </div>
+        <div class="col-md-3">
+          <label for="last_name">Last Name Name</label>
+          <input type="text" name="last_name" class="form-control" placeholder="Last Name" id="last_name">
+        </div>
+        <div class="col-md-3">
+          <label for="birthday">Birthday</label>
+          <input type="date" name="birthday" class="form-control" id="birthday">
+        </div>
+        <div class="col-md-3">
+          <label for="email">Email Address</label>
+          <input type="email" name="email" class="form-control" placeholder="Email Address" id="email">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <br>
+          <label for="ticket_type">Ticket Type</label>
+          <select name="ticket_type" class="form-control" id="ticket_type">
+            {% for ticket in tickets %}
+            <option value="{{ticket.id}}">{{ticket.name}} - {{ticket.price}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <br>
+          <label for="submit" class="submit-btn">Submit</label>
+          <input type="submit" class="btn btn-primary form-control" value="Register" id="submit">
+        </div>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}

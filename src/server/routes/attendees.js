@@ -7,7 +7,6 @@ router.get('/:id', (req, res, next) => {
   const attendeeID = req.params.id;
   attendeesController.getAttendee(attendeeID)
   .then((attendee) => {
-    console.log(attendee);
     res.render('attendees', {
       attendee: attendee[0]
     });
