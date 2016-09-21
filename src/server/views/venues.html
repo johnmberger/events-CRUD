@@ -6,6 +6,10 @@
 
   <div class="container">
     <h1>{{venue.name}}</h1>
+    <p>
+      {{venue.line_1}}
+      {{venue.city}}, {{venue.state}} {{venue.zip}}
+    </p>
     <hr>
     <div class="col-md-12 flexbox">
     {% for event in events %}

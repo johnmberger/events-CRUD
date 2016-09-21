@@ -37,7 +37,7 @@ function getAllEvents(req, res, next) {
         var timezoneOffset = now.getTimezoneOffset();
         now = now.getTime() + (timezoneOffset * 60000);
         var renderEvents = events.filter((event) => {
-          return event.end_datetime.getTime() >= now;
+          return event.start_datetime.getTime() >= now;
         });
         res.render('index', {events: renderEvents});
       });

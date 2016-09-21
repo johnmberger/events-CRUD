@@ -6,9 +6,10 @@ const attendeesController = require('../controllers/attendees');
 router.get('/:id', (req, res, next) => {
   const attendeeID = req.params.id;
   attendeesController.getAttendee(attendeeID)
-  .then((attendee) => {
+  .then((result) => {
     res.render('attendees', {
-      attendee: attendee[0]
+      attendee: result[0][0],
+      events: result[1]
     });
   })
   .catch((err) => {

@@ -5,8 +5,19 @@
 {% block content %}
 
   <div class="container">
-    <h1>{{attendee.preferred_name}} {{attendee.last_name}}</h1>
-    <hr>
+    <div class="col-md-12">
+      <h1>{{attendee.preferred_name}} {{attendee.last_name}}</h1>
+      <hr>
+    </div>
+    <div class="col-md-12 flexbox">
+      {% for event in events %}
+      <div class="col-md-6"></h2>
+        <h2>{{event.title}} </h2>
+        <p>{{event.start_datetime | date('LLL')}}</p>
+        <a href="/venues/{{event.venue_id}}">  <h4>{{event.venue_name}}</h4></a>
+        <h4>{{event.description}}</h4>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-
 {% endblock %}
