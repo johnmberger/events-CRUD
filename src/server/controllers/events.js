@@ -15,12 +15,18 @@ function register(eventID, formSubmission) {
       var now = new Date();
       var timezoneOffset = now.getTimezoneOffset();
       now = now.getTime() + (timezoneOffset * 60000);
-      if (now - person.birthday.getTime() < 661500000000) {
+      if (now - person.birthday.getTime() < 661500000000 && formSubmission.over_21) {
         return {
           message: 'existing user, not old enough',
           data: person,
           formSubmission
         };
+      } else {
+        return knex('tickets_attendees')
+        .insert({
+          attendee_id: person.id,
+          ticket_id: formSubmission.ticket_id
+        }).returning('attendee_id');
       }
     } else {
       return knex('attendees').insert({

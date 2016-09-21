@@ -8,7 +8,6 @@ router.get('/:id/register', (req, res, next) => {
   .then((results) => {
     var event = results[0][0];
     var tickets = results[1];
-    console.log(results);
     res.render('events', {
       title: `Register | ${event.title}`,
       event,
@@ -22,12 +21,9 @@ router.post('/:id/register', (req, res, next) => {
   const formSubmission = req.body;
   eventsController.register(eventID, formSubmission)
   .then((response) => {
-
     if (response.message === 'existing user, not old enough') {
       eventsController.getEvent(eventID)
       .then((results) => {
-        console.log('got to this part', results);
-        console.log(response);
         var event = results[0][0];
         var tickets = results[1];
 
@@ -35,9 +31,12 @@ router.post('/:id/register', (req, res, next) => {
           title: `Register | ${event.title}`,
           event,
           tickets,
-          errors: [`Welcome back, ${response.data.preferred_name}, you're not old enought for this event!`]
+          errors: [`Welcome back, ${response.data.preferred_name}, you're not old enought for this event!`],
+          formSubmission
         });
       });
+    } else {
+      res.redirect(`/attendees/${response[0]}`);
     }
   });
 });
